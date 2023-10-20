@@ -2,8 +2,10 @@
 Server IRC project for 42 in **C++98**, Best used with the client *IRSSI* or *nc*
 
 # usage
+```bash
 make
 ./ircserv port password
+```
 
 # commands
 - PASS
