@@ -28,8 +28,10 @@ void Server::sendCommand(int const fd, std::vector<std::string> cmd_parts)
         return;
     }
     file.close();
-    if (_files.find(filename) != _files.end())
+    if (_files.find(filename) != _files.end()) {
         _users[fd]->setSendBuff(":localhost " + _users[fd]->getNickName() + " :The filename " + filename + " is already used \r\n");
+        return;
+    }
     File f(filename, arguments[0], _users[fd]->getNickName(), arguments[1]);
     _files.insert(std::pair<std::string, File>(filename, f));
     user->second->setSendBuff(_users[fd]->getPrefix() + " " + "NOTICE" + " " + user->second->getNickName() + " want to send you this file " + filename + "\r\n");

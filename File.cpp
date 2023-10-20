@@ -4,7 +4,7 @@
 File::File(std::string filename, std::string filepath, std::string sender, std::string receiver)
 {
     _filename = filename;
-    _filename = filepath;
+    _filepath = filepath;
     _sender = sender;
     _receiver = receiver;
 }
