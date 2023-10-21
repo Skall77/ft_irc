@@ -90,7 +90,13 @@ class Server {
 	public:
 		Server(std::string name, std::string port, std::string password);
 		~Server();
+		//method
 		void runServer();
+		std::string							getName() const;
+		int									getConnectionNumbers() const;
+		std::map<int, User *>				getUsers() const;
+		std::map<std::string, Channel *>	getChannels() const;
+
 
 	private:
 		Server();

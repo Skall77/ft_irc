@@ -141,7 +141,7 @@ void Server::runServer()
 						break;
 				}
 			}
-			else if (_poll_fd[i].revents & POLLOUT) // = "Alert me when I can send() data to this socket without blocking."
+			else if (_poll_fd[i].revents & POLLOUT) // = "can send() data to this socket without blocking."
 			{
 				if (handlePolloutEvent(i)== - 1) // If not the listener, we're just a regular client
 						break;
@@ -151,11 +151,18 @@ void Server::runServer()
 					break;
 				else
 					return;
-
 			}
 		}
 	}
 }
+
+std::string Server::getName() const { return _server_name; }
+
+int Server::getConnectionNumbers() const { return _connection_numbers; }
+
+std::map<int, User *> Server::getUsers() const { return _users; }
+
+std::map<std::string, Channel *>	Server::getChannels() const { return _channels; }
 
 int Server::newConnection(void)
 {

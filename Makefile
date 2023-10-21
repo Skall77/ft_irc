@@ -4,6 +4,7 @@ SRCS = main.cpp \
 	Channel.cpp \
     parsing.cpp \
 	File.cpp \
+	Bot.cpp \
     commands/registration.cpp \
 	commands/commands.cpp \
 	commands/ping.cpp \
@@ -32,6 +33,7 @@ HEADER = Server.hpp \
     	 User.hpp \
 		 Channel.hpp \
 		 File.hpp \
+		 Bot.hpp \
 
 .PHONY: all clean fclean re
 
