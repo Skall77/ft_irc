@@ -1,5 +1,5 @@
 #include "Bot.hpp"
-
+#include "Server.hpp"
 
 Bot::Bot(): _name("IRCSavvy")
 {
@@ -31,29 +31,5 @@ std::string Bot::Introduction() const
     s += "[3] Euro converter. I love money, do you ? See how much dollars you can get for your euros.\n";
     s += "[4] + [NumberOfFace] Dice Roll. Always usefull for games or crucial life decision-making.";
 
-    return s;
-}
-
-std::string Bot::getInfo(Server &server) const
-{
-    std::string s = "You are currently using the server " + server.getName() + " and there is " + std::to_string(server.getConnectionNumbers()) + " users online.\n";
-    std::map<int, User *>::iterator user = server.getUsers().begin();
-    s += "Here are the current users login on the server: ";
-    while (user != server.getUsers().end()) {
-        s += user->second->getNickName() + ", ";
-        user++;
-    }
-    s.erase(s.length() - 2);
-    s  += "\n";
-    std::map<std::string, Channel *>::iterator channel = server.getChannels().begin();
-    if (channel != server.getChannels().end()) {
-    s += " And here are the current channels opened on the server: ";
-    while (channel != server.getChannels().end()) {
-        s += channel->second->getName() + ", ";
-        channel++;
-    }
-    s.erase(s.length() - 2);
-    s  += "\n";
-    }
     return s;
 }

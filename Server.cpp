@@ -1,5 +1,6 @@
 
 #include "Server.hpp"
+#include "Bot.hpp"
 
 Server::Server()
 {
@@ -24,8 +25,7 @@ Server::Server(std::string name, std::string port, std::string password)
 	_poll_fd[0].fd = _fd_socket;
 	_poll_fd[0].events = POLLIN;
 	_server_loop = true;
-	
-	//std::cout << _fd_socket << std::endl;
+	_bot = new Bot();
 }
 
 Server::Server(const Server &copy)
@@ -48,11 +48,13 @@ Server& Server::operator=(const Server &obj)
 	this->_users = obj._users;
 	this->_channels = obj._channels;
 	this->_files = obj._files;
+	this->_bot = obj._bot;
 	return (*this);
 }
 
 Server::~Server()
 {
+	delete _bot;
 	if (_poll_fd)
 		delete [] _poll_fd;
 	if (_fd_socket != -1)

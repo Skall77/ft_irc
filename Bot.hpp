@@ -3,6 +3,8 @@
 
 #include "Server.hpp"
 
+class Server;
+
 class Bot {
     private:
         std::string _name;
@@ -16,7 +18,6 @@ class Bot {
         std::string getName() const;
         //method
         std::string Introduction() const;
-        std::string getInfo(Server &server) const;
 
 };
 

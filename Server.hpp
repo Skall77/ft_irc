@@ -23,6 +23,7 @@
 #include "User.hpp"
 #include "Channel.hpp"
 #include "File.hpp"
+#include "Bot.hpp"
 
 extern bool	stop_server;
 
@@ -73,6 +74,7 @@ extern bool	stop_server;
 class User;
 class Channel;
 class File;
+class Bot;
 
 class Server {
 	private:
@@ -86,6 +88,7 @@ class Server {
 		std::map<std::string, Channel *>	_channels;
 		bool								_server_loop;
 		std::map<std::string, File>			_files;
+		Bot									*_bot;
 	
 	public:
 		Server(std::string name, std::string port, std::string password);
@@ -96,7 +99,6 @@ class Server {
 		int									getConnectionNumbers() const;
 		std::map<int, User *>				getUsers() const;
 		std::map<std::string, Channel *>	getChannels() const;
-
 
 	private:
 		Server();
@@ -172,8 +174,11 @@ class Server {
 		void		sendCommand(int const fd, std::vector<std::string> cmd_parts);
 			//get
 		void		getCommand(int const fd, std::vector<std::string> cmd_parts);
+			//bot
+		void		runBot(int const fd, std::string arguments);
+		std::string getInfo();
+
 };
-
-
+		
 
 #endif

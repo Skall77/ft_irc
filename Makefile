@@ -5,6 +5,7 @@ SRCS = main.cpp \
     parsing.cpp \
 	File.cpp \
 	Bot.cpp \
+	ircsavvy.cpp \
     commands/registration.cpp \
 	commands/commands.cpp \
 	commands/ping.cpp \

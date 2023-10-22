@@ -40,7 +40,13 @@ void Server::privmsgCommand(int const fd, std::vector<std::string> cmd_parts)
 			user++;
 		}
 		if (it  == _channels.end() && user == _users.end())
-			_users[fd]->setSendBuff(ERR_NOSUCHNICK(_users[fd]->getNickName(), recipient));
+		{
+			if (recipient == "IRCSavvy"){
+					runBot(fd, text);
+			}
+			else
+				_users[fd]->setSendBuff(ERR_NOSUCHNICK(_users[fd]->getNickName(), recipient));
+		}
 		else {
 			if (user == _users.end()) {
 				if(it->second->getUsersList().find(user->second->getNickName()) != it->second->getUsersList().end()) {
