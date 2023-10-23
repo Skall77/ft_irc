@@ -3,11 +3,16 @@
 
 #include "Server.hpp"
 
+
 class Server;
 
 class Bot {
     private:
         std::string _name;
+        std::string _blue;
+        std::string _green;
+        std::string _reset;
+        std::string _yellow;
 
     public:
         Bot();
@@ -18,6 +23,7 @@ class Bot {
         std::string getName() const;
         //method
         std::string Introduction() const;
+        std::string convertEuro(float euro, std::string s_euros) const;
 
 };
 

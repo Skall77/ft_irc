@@ -241,7 +241,6 @@ int Server::regularClient(int i)
 	else { // else deal with commands
 		if (buf) {
 			std::cout << "\033[1;33m[C] Message received from client #" << fd << ": " << buf << "\033[0m";
-			
 		}
 		if (_users.find(fd) == _users.end())
 			return (-1);
