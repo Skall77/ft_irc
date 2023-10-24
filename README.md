@@ -32,3 +32,7 @@ make
 - SEND
     - Since GET and SEND are not recognise by *IRSSI* you have to /quote GET and /quote SEND to use them. (Those commands allow a client to send a file to the server and for another client to get it)
 
+# bot
+
+There is a bot! To call it, just type ```/msg IRCSavvy YourMessage``` The bot can give you information about the server, send you some trivia, convert your currency or roll some dice.
+
