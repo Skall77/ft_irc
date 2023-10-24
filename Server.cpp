@@ -219,7 +219,7 @@ void Server::removeFromPollFd(int i)
 		delete it->second;
 		_users.erase(it);
 	} else {
-		std::cerr << "Error : can't find the fd ???"<< std::endl;
+		std::cerr << "Error : can't find the fd."<< std::endl;
 	}
 }
 
@@ -239,9 +239,8 @@ int Server::regularClient(int i)
 		return (-1);
 	}
 	else { // else deal with commands
-		if (buf) {
-			std::cout << "\033[1;33m[C] Message received from client #" << fd << ": " << buf << "\033[0m";
-		}
+		std::cout << "\033[1;33m[C] Message received from client #" << fd << ": " << buf << "\033[0m";
+
 		if (_users.find(fd) == _users.end())
 			return (-1);
 		else 

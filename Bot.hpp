@@ -2,7 +2,7 @@
 #define BOT_HPP
 
 #include "Server.hpp"
-
+#include <ctime>
 
 class Server;
 
@@ -24,6 +24,12 @@ class Bot {
         //method
         std::string Introduction() const;
         std::string convertEuro(float euro, std::string s_euros) const;
+        std::string getTrivia() const;
+        std::string getRollDice(std::vector<std::string> &options);
+        bool        isFloat(const char* s);
+    private:
+        bool        isUnsignedInt(const std::string &str);
+        std::string intToString(int value);
 
 };
 

@@ -1,7 +1,5 @@
 #include "Server.hpp"
 
-static bool isFloat(const char* s);
-
 void Server::runBot(int const fd, std::string arguments)
 {
 	std::vector<std::string> options;
@@ -10,23 +8,27 @@ void Server::runBot(int const fd, std::string arguments)
     while (iss >> token_option)
         options.push_back(token_option);
     
-    if (options.size() == 0)
-        _users[fd]->setSendBuff(_bot->Introduction() + "\r\n");
     options[0].erase(0, 1);
     if (options[0] == "1" || options[0] == "[1]") {
         _users[fd]->setSendBuff(_users[fd]->getPrefix() + " NOTICE " + _users[fd]->getNickName() + " " + getInfo() + "\r\n");
+    }
+    else if (options[0] == "2" || options[0] == "[2]") {
+        _users[fd]->setSendBuff(_users[fd]->getPrefix() + " NOTICE " + _users[fd]->getNickName() + " " + _bot->getTrivia() + "\r\n");
     }
     else if (options[0] == "3" || options[0] == "[3]") {
         if (options.size() < 2)
             _users[fd]->setSendBuff(_users[fd]->getPrefix() + " NOTICE " + _users[fd]->getNickName() + " " + "Bad numbers of arguments!" + "\r\n");
         else {
-            if (!isFloat(options[1].c_str()))
+            if (!_bot->isFloat(options[1].c_str()))
                 _users[fd]->setSendBuff(_users[fd]->getPrefix() + " NOTICE " + _users[fd]->getNickName() + " " + options[1] + " is not a float!" + "\r\n");
             else {
                 float euro = static_cast<float>(strtod(options[1].c_str(), NULL));
                 _users[fd]->setSendBuff(_users[fd]->getPrefix() + " NOTICE " + _users[fd]->getNickName() + " " + _bot->convertEuro(euro, options[1]) + "\r\n");
             }
         }
+    }
+    else if (options[0] == "4" || options[0] == "[4]") {
+        _users[fd]->setSendBuff(_users[fd]->getPrefix() + " NOTICE " + _users[fd]->getNickName() + " " + _bot->getRollDice(options) + "\r\n");
     }
     else
         _users[fd]->setSendBuff(_users[fd]->getPrefix() + " NOTICE " + _users[fd]->getNickName() + " " + _bot->Introduction() + "\r\n");
@@ -60,13 +62,4 @@ std::string Server::getInfo()
     s  += "\n";
     }
     return s;
-}
-
-static bool isFloat(const char* s) {
-    char* endPtr;
-    strtod(s, &endPtr);
-    if (*endPtr != '\0' && *endPtr != '\n') {
-        return false;
-    }
-    return true;
 }

@@ -35,6 +35,7 @@ HEADER = Server.hpp \
 		 Channel.hpp \
 		 File.hpp \
 		 Bot.hpp \
+		 macro.hpp \
 
 .PHONY: all clean fclean re
 

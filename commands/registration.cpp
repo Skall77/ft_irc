@@ -55,6 +55,8 @@ bool Server::validNick(std::string nick_name)
 			return false;
 		i++;
 	}
+	if (nick_name == "IRCSavvy")
+		return false;
 	return true;
 }
 
