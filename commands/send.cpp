@@ -1,5 +1,13 @@
 #include "../Server.hpp"
 
+/*
+	The SEND command is used to send a file to another client on the server.
+	The parameter <nickname> is the nickname of the person to possibly receive the file at the path <filepath>.
+
+	Command: QUOTE SEND
+  	Parameters: <filepath> <nickname>
+*/
+
 static std::string parseSend(std::string str, std::vector<std::string> &arguments);
 
 void Server::sendCommand(int const fd, std::vector<std::string> cmd_parts)

@@ -5,7 +5,6 @@ void Server::registration(int const fd, std::string cmd)
 	std::vector<std::string> cmd_parts(3); //cmd_parts[0] is prefix, cmd_parts[1] is the command, cmd_parts[2] is the rest.
 	if (ft_split_command(cmd, cmd_parts) == -1)
 		return ;
-	std::cout << "[0]: |" << cmd_parts[0] << "| [1]: |" << cmd_parts[1] << "| [2]: |" << cmd_parts[2] << "|" << std::endl;
 	if (cmd_parts[1].find("NICK") != std::string::npos) {
 		nickCommand(fd, cmd_parts);
 	}	
@@ -28,7 +27,6 @@ void Server::nickCommand(int const fd, std::vector<std::string> cmd_parts)
 {
 	std::string nick_name = ft_strtok(cmd_parts[2]);
 	std::string old_name = "";
-	std::cout << "the nick is: |" << cmd_parts[2] << "|" << std::endl;
 	if (nick_name.empty())
 		_users[fd]->setSendBuff(ERR_NONICKNAMEGIVEN(_users[fd]->getNickName()));
 	else if (!validNick(nick_name))

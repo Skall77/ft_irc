@@ -38,12 +38,12 @@ int Server::ft_split_command(std::string cmd, std::vector<std::string> &cmd_part
 		return -1;
 	
 	std::string copy = cmd;
-	if (cmd[0] == ':') // If there is a prefix, we delete it from copy to get the command name.
+	if (cmd[0] == ':')
 	{
 		if (cmd.find_first_of(' ') != std::string::npos)
 			copy.erase(0, copy.find_first_of(' ') + 1);
 	}
-	if (copy.find_first_of(' ') == std::string::npos) // If there is nothing after the command, we insert it and erase the \r.
+	if (copy.find_first_of(' ') == std::string::npos)
 	{
 		cmd_parts[1].insert(0, copy, 0, std::string::npos);
 		if (cmd_parts[1].find('\r') != std::string::npos)
@@ -53,14 +53,14 @@ int Server::ft_split_command(std::string cmd, std::vector<std::string> &cmd_part
 		cmd_parts[1].insert(0, copy, 0, copy.find_first_of(' '));
 	}
 
-	cmd_parts[0].assign(cmd, 0, cmd.find(cmd_parts[1], 0)); // insert everything until we found the name of the command, that's the prefix.
+	cmd_parts[0].assign(cmd, 0, cmd.find(cmd_parts[1], 0));
 
 	size_t msg_start = cmd.find(cmd_parts[1], 0) + cmd_parts[1].length();
-	cmd_parts[2] = cmd.substr(msg_start + 1, std::string::npos); // create substring starting after the name. then erase \r.
+	cmd_parts[2] = cmd.substr(msg_start + 1, std::string::npos);
 	if (cmd_parts[2].find('\r') != std::string::npos)
 		cmd_parts[2].erase(cmd_parts[2].find('\r'), 1);
 
-	for (size_t i = 0; i < cmd_parts[1].size(); i++)	// put the name of the command in UPPERCASE, this way the server understand /nick and /NICK
+	for (size_t i = 0; i < cmd_parts[1].size(); i++)
 		cmd_parts[1][i] = std::toupper(cmd_parts[1][i]);
 	return (0);
 }
@@ -70,10 +70,8 @@ std::string Server::ft_strtok(const std::string &msg) // return everything until
 {
 	std::string nickname;
 
-    // Find the position of the first non-space character
     size_t firstNonSpacePos = msg.find_first_not_of(' ');
 
-    // Check if a non-space character was found and extract the nickname
     if (firstNonSpacePos != std::string::npos)
     {
         size_t spacePos = msg.find(' ', firstNonSpacePos);

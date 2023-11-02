@@ -1,5 +1,13 @@
 #include "../Server.hpp"
 
+/*
+	The Get command is used to get a file from another client on the server.
+	The parameter <filepath> is the path were you want receive the file named <filename>.
+
+	Command: QUOTE GET
+  	Parameters: <filepath> <filename>
+*/
+
 static void parseGet(std::string str, std::vector<std::string> &arguments);
 
 void Server::getCommand(int const fd, std::vector<std::string> cmd_parts)
@@ -35,6 +43,9 @@ void Server::getCommand(int const fd, std::vector<std::string> cmd_parts)
     if (output_file.is_open())
         output_file << input_file.rdbuf();
     _files.erase(file.getFileName());
+    output_file.close();
+    input_file.close();
+    _users[fd]->setSendBuff(":localhost " + _users[fd]->getNickName() + " :You successfully got the file" + arguments[1] + " at the path " + path + "\r\n");
 }
 
 static void parseGet(std::string str, std::vector<std::string> &arguments) {
